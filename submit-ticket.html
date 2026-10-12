@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Help Desk - Submit Ticket</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- Shared Navigation Bar For All Pages -->
+<header>
+    <div class="navbar">
+        <h1>IT Help Desk</h1>
+
+        <nav>
+            <a href="index.html">Dashboard</a>
+            <a href="submit-ticket.html">Submit Ticket</a>
+            <a href="tickets.html">My Tickets</a>
+            <a href="knowledge-base.html">Knowledge Base</a>
+            <a href="troubleshoot.html">Troubleshoot</a>
+            <a href="profile.html">Profile</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+    <!-- Submit Ticket Page Introduction -->
+    <h2 class="page-title">Submit a Support Ticket</h2>
+    <p class="page-description">
+        Provide information about your IT issue and the Help Desk will assist you.
+    </p>
+
+    <!-- Successful Ticket Submission Feedback -->
+    <div id="ticket-success" class="success-message" hidden></div>
+
+    <!-- Ticket Submission Form -->
+    <div class="card">
+
+        <form id="ticket-form">
+
+            <!-- Issue Category -->
+            <div class="form-group">
+                <label for="category">Category</label>
+
+                <select id="category" name="category">
+                    <option value="">Select a category</option>
+                    <option value="Hardware">Hardware</option>
+                    <option value="Software">Software</option>
+                    <option value="Network">Network</option>
+                    <option value="Account">Account</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <!-- Ticket Subject -->
+            <div class="form-group">
+                <label for="subject">Subject</label>
+
+                <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    placeholder="Briefly describe the issue"
+                >
+            </div>
+
+            <!-- Ticket Priority -->
+            <div class="form-group">
+                <label for="priority">Priority</label>
+
+                <select id="priority" name="priority">
+                    <option value="Low">Low</option>
+                    <option value="Normal" selected>Normal</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+
+            <!-- Device Information -->
+            <div class="form-group">
+                <label for="device">Device or Computer Name</label>
+
+                <input
+                    type="text"
+                    id="device"
+                    name="device"
+                    placeholder="Optional"
+                >
+            </div>
+
+            <!-- Detailed Issue Description -->
+            <div class="form-group">
+                <label for="description">Description</label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    placeholder="Describe the problem you are experiencing"
+                ></textarea>
+            </div>
+
+            <!-- Form Feedback -->
+            <p id="form-error" class="error-message"></p>
+
+            <!-- Ticket Form Controls -->
+            <button type="submit">Submit Ticket</button>
+
+            <a href="index.html" class="button button-secondary">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+
+</main>
+
+<script src="js/tickets.js"></script>
+
+</body>
+</html>

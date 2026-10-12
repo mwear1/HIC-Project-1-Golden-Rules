@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Help Desk - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- Shared Navigation Bar For All Pages -->
+<header>
+    <div class="navbar">
+        <h1>IT Help Desk</h1>
+
+        <nav>
+            <a href="index.html">Dashboard</a>
+            <a href="submit-ticket.html">Submit Ticket</a>
+            <a href="tickets.html">My Tickets</a>
+            <a href="knowledge-base.html">Knowledge Base</a>
+            <a href="troubleshoot.html">Troubleshoot</a>
+            <a href="profile.html">Profile</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+     <!-- Dashboard Introduction -->
+    <h2 class="page-title">Help Desk Dashboard</h2>
+    <p class="page-description">
+        View your support activity or get help with an IT issue.
+    </p>
+
+    <!-- Ticket Status Summary -->
+    <div class="dashboard-cards">
+
+        <div class="card">
+            <h3>Open Tickets</h3>
+            <p class="stat-number" id="open-count">0</p>
+            <p>Tickets currently waiting for assistance.</p>
+        </div>
+
+        <div class="card">
+            <h3>Resolved Tickets</h3>
+            <p class="stat-number" id="resolved-count">0</p>
+            <p>Tickets that have been completed.</p>
+        </div>
+
+    </div>
+
+    <!-- Common Help Desk Actions -->
+    <div class="card">
+        <h3>Quick Actions</h3>
+
+        <div class="quick-actions">
+            <a href="submit-ticket.html" class="button">
+                Submit New Ticket
+            </a>
+
+            <a href="tickets.html" class="button">
+                View My Tickets
+            </a>
+
+            <a href="troubleshoot.html" class="button">
+                Troubleshoot a Problem
+            </a>
+        </div>
+    </div>
+
+     <!-- Most Recently Submitted Tickets -->
+    <div class="card">
+        <h3>Recent Tickets</h3>
+        <div id="recent-tickets">
+            <p>You have not submitted any tickets yet.</p>
+        </div>
+    </div>
+
+</main>
+
+<script src="js/tickets.js"></script>
+
+</body>
+</html>
