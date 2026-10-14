@@ -1,8 +1,16 @@
-<!-- Shared Navigation Bar For All Pages -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Help Desk - Knowledge Base</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
 <header>
     <div class="navbar">
         <h1>IT Help Desk</h1>
-
         <nav>
             <a href="index.html">Dashboard</a>
             <a href="submit-ticket.html">Submit Ticket</a>
@@ -14,3 +22,140 @@
         </nav>
     </div>
 </header>
+
+<main>
+    <h2 class="page-title">Knowledge Base</h2>
+    <p class="page-description">
+        Find answers to common IT problems before submitting a support ticket.
+    </p>
+
+    <section class="card">
+        <h2>Find an Article</h2>
+
+        <form id="search-form">
+            <div class="form-group">
+                <label for="search">Search Help Articles</label>
+                <input
+                    type="search"
+                    id="search"
+                    placeholder="Try passwords, Wi-Fi, or printers"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="category">Filter by Category</label>
+                <select id="category">
+                    <option value="all">All Categories</option>
+                    <option value="Account">Accounts</option>
+                    <option value="Network">Network</option>
+                    <option value="Hardware">Hardware</option>
+                    <option value="Software">Software</option>
+                </select>
+            </div>
+
+            <button type="submit">Search Articles</button>
+            <button type="button" id="clear-search"
+                    class="button-secondary">Clear Search</button>
+        </form>
+
+        <p id="result-count" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card">
+        <h2>Help Articles</h2>
+
+        <div id="articles">
+            <article class="article" data-category="Network">
+                <details>
+                    <summary>How do I connect to Wi-Fi?</summary>
+                    <span class="category-label">Network</span>
+                    <p>
+                        Open your device's Wi-Fi settings, select your
+                        school or workplace network, and enter your credentials
+                        if requested. If it fails, reconnect and check that
+                        airplane mode is off.
+                    </p>
+                </details>
+            </article>
+
+            <article class="article" data-category="Account">
+                <details>
+                    <summary>How do I reset my password?</summary>
+                    <span class="category-label">Accounts</span>
+                    <p>
+                        Use your organization's official password-reset page
+                        and follow the identity verification steps. Never
+                        share your password or verification codes.
+                    </p>
+                </details>
+            </article>
+
+            <article class="article" data-category="Hardware">
+                <details>
+                    <summary>What if my printer is not working?</summary>
+                    <span class="category-label">Hardware</span>
+                    <p>
+                        Check that the printer is powered on, has paper,
+                        and is connected. Confirm that you selected the
+                        correct printer, then try again. Contact IT if the
+                        problem continues.
+                    </p>
+                </details>
+            </article>
+
+            <article class="article" data-category="Software">
+                <details>
+                    <summary>What if an application freezes?</summary>
+                    <span class="category-label">Software</span>
+                    <p>
+                        Wait briefly and save your work if possible.
+                        Close and reopen the application. If it remains
+                        frozen, restart your device or submit a ticket.
+                    </p>
+                </details>
+            </article>
+
+            <article class="article" data-category="Network">
+                <details>
+                    <summary>Why is my internet connection slow?</summary>
+                    <span class="category-label">Network</span>
+                    <p>
+                        Check whether other websites are slow, reconnect
+                        to Wi-Fi, and pause unnecessary downloads. If multiple
+                        devices are affected, report the issue to IT.
+                    </p>
+                </details>
+            </article>
+
+            <article class="article" data-category="Account">
+                <details>
+                    <summary>What should I do about a suspicious email?</summary>
+                    <span class="category-label">Accounts</span>
+                    <p>
+                        Do not click suspicious links or open unexpected
+                        attachments. Check the sender's actual email address
+                        and report the message using your organization's
+                        approved process.
+                    </p>
+                </details>
+            </article>
+        </div>
+
+        <p id="no-results" hidden>
+            No matching articles found. Try another search or category.
+        </p>
+    </section>
+
+    <section class="card">
+        <h2>Still Need Help?</h2>
+        <p>
+            If these solutions do not solve your problem, submit a support ticket.
+        </p>
+        <a href="submit-ticket.html" class="button">Submit a Ticket</a>
+    </section>
+</main>
+
+<script src="js/knowledge-base.js"></script>
+<script src="js/settings.js"></script>
+</body>
+</html>
