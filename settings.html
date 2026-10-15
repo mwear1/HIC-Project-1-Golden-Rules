@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Set the character encoding and responsive layout. -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Set the page title and load the shared stylesheet. -->
     <title>IT Help Desk - Settings</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <header>
-    <!-- Shared navigation links between the Help Desk pages -->
+    <!-- Shared navigation links between the Help Desk pages. -->
     <div class="navbar">
         <h1>IT Help Desk</h1>
         <nav>
@@ -19,24 +22,30 @@
             <a href="knowledge-base.html">Knowledge Base</a>
             <a href="troubleshoot.html">Troubleshoot</a>
             <a href="profile.html">Profile</a>
-            <a href="settings.html">Settings</a>
+            <a href="settings.html" aria-current="page">Settings</a>
         </nav>
     </div>
 </header>
 
 <main>
+    <!-- Page heading and description. -->
     <h2 class="page-title">Settings</h2>
+
     <p class="page-description">
         Customize the appearance and notification preferences of your IT Help Desk.
     </p>
 
+    <!-- Appearance settings. -->
     <section class="card">
         <h2>Appearance</h2>
 
         <div class="setting-option">
+            <!-- The label's for attribute matches the dropdown's ID. -->
             <label for="theme">Display Theme</label>
+
             <p>Choose the appearance that is most comfortable for you.</p>
 
+            <!-- JavaScript reads this dropdown to determine the selected theme. -->
             <select id="theme">
                 <option value="light">Light Mode</option>
                 <option value="dark">Dark Mode</option>
@@ -44,43 +53,61 @@
         </div>
     </section>
 
+    <!-- Notification preferences. -->
     <section class="card">
         <h2>Notifications</h2>
 
         <div class="setting-option">
+            <!-- The label and checkbox use matching IDs. -->
             <label class="checkbox-label" for="ticket-updates">
                 <input type="checkbox" id="ticket-updates">
                 <span>Ticket Updates</span>
             </label>
+
             <p>Set your preference for updates about ticket progress.</p>
         </div>
 
         <div class="setting-option">
+            <!-- Email notification preference. -->
             <label class="checkbox-label" for="email-notifications">
                 <input type="checkbox" id="email-notifications">
                 <span>Email Notifications</span>
             </label>
+
             <p>Set your preference for email notifications.</p>
         </div>
 
+        <!-- Explain the limits of these prototype settings. -->
         <p class="help-text">
             These preferences are saved in this browser. This prototype
             does not send emails or change real ticket notifications.
         </p>
     </section>
 
+    <!-- Buttons for saving or restoring preferences. -->
     <section class="card">
         <h2>Save Preferences</h2>
+
         <p>Save your choices to keep them available when you return.</p>
 
+        <!-- These IDs match the JavaScript selectors. -->
         <button type="button" id="save-settings">Save Settings</button>
-        <button type="button" id="reset-settings"
-                class="button-secondary">Restore Defaults</button>
 
+        <button
+            type="button"
+            id="reset-settings"
+            class="button-secondary"
+        >
+            Restore Defaults
+        </button>
+
+        <!-- JavaScript displays save/reset confirmation messages here. -->
         <p id="settings-message" role="status" aria-live="polite"></p>
     </section>
 </main>
 
+<!-- Load the JavaScript that handles settings and dark mode. -->
 <script src="js/settings.js"></script>
+
 </body>
 </html>
