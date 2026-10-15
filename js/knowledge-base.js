@@ -1,98 +1,79 @@
-// Find the Knowledge Base search controls and article elements.
-const searchForm = document.querySelector("#search-form");
+// Find the search controls and status messages in knowledge-base.html.
 const searchInput = document.querySelector("#search");
 const categorySelect = document.querySelector("#category");
-const clearSearchButton = document.querySelector("#clear-search");
+const searchForm = document.querySelector("#search-form");
+const clearButton = document.querySelector("#clear-search");
 const resultCount = document.querySelector("#result-count");
-const articlesContainer = document.querySelector("#articles");
 const noResultsMessage = document.querySelector("#no-results");
 
-// Get all articles displayed inside the articles container.
-const articles = articlesContainer
-    ? Array.from(articlesContainer.querySelectorAll(".article"))
-    : [];
+// Get all help articles so the script can filter them.
+const articles = document.querySelectorAll(".article");
 
-// Search articles by their text and the selected category.
+// Filter articles using the search phrase and selected category.
 function filterArticles() {
-    // Convert the search text to lowercase for case-insensitive matching.
-    const searchText = searchInput.value.trim().toLowerCase();
+    // Make the search case-insensitive.
+    const searchText = searchInput.value.toLowerCase().trim();
 
-    // Read the selected category from the dropdown.
+    // Get the selected category, such as "Network" or "Hardware".
     const selectedCategory = categorySelect.value;
 
-    // Track how many articles match the current filters.
+    // Count how many articles match the filters.
     let visibleCount = 0;
 
-    // Check each article against the search text and category.
+    // Check each article.
     articles.forEach(function (article) {
-        // Read the article's text and category.
+        // Include the article title and body in the text search.
         const articleText = article.textContent.toLowerCase();
+
+        // Read the category from the article's data-category attribute.
         const articleCategory = article.dataset.category;
 
-        // An article matches if its text contains the search term.
+        // An article matches if its text contains the search phrase.
         const matchesSearch = articleText.includes(searchText);
 
-        // The "all" option allows every category.
+        // "all" matches every category; otherwise categories must match.
         const matchesCategory =
             selectedCategory === "all" ||
             articleCategory === selectedCategory;
 
-        // Show the article only when it matches both filters.
-        const shouldShow = matchesSearch && matchesCategory;
-
-        article.hidden = !shouldShow;
-
-        // Count articles that remain visible.
-        if (shouldShow) {
+        // Show articles that match both filters.
+        if (matchesSearch && matchesCategory) {
+            article.hidden = false;
             visibleCount++;
+        } else {
+            // Hide articles that do not match.
+            article.hidden = true;
         }
     });
 
-    // Update the number of matching articles.
-    if (resultCount !== null) {
-        resultCount.textContent =
-            visibleCount + (visibleCount === 1
-                ? " article found."
-                : " articles found.");
-    }
+    // Update the results message.
+    resultCount.textContent =
+        "Showing " + visibleCount + " article(s).";
 
-    // Show a message when no articles match.
-    if (noResultsMessage !== null) {
-        noResultsMessage.hidden = visibleCount !== 0;
-    }
+    // Show the no-results message only if nothing matched.
+    noResultsMessage.hidden = visibleCount !== 0;
 }
 
-// Prevent the form from reloading the page when Search is clicked.
-if (searchForm !== null) {
-    searchForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        filterArticles();
-    });
-}
+// When the user submits the search form, filter without reloading the page.
+searchForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    filterArticles();
+});
 
-// Update results as the user types in the search field.
-if (searchInput !== null) {
-    searchInput.addEventListener("input", filterArticles);
-}
+// Update results as the user types.
+searchInput.addEventListener("input", filterArticles);
 
-// Update results whenever the selected category changes.
-if (categorySelect !== null) {
-    categorySelect.addEventListener("change", filterArticles);
-}
+// Update results when the category dropdown changes.
+categorySelect.addEventListener("change", filterArticles);
 
-// Clear the search text and restore all articles.
-if (clearSearchButton !== null) {
-    clearSearchButton.addEventListener("click", function () {
-        searchInput.value = "";
-        categorySelect.value = "all";
+// Clear the search phrase and category filter.
+clearButton.addEventListener("click", function () {
+    searchInput.value = "";
+    categorySelect.value = "all";
 
-        // Refresh the results after clearing the filters.
-        filterArticles();
+    // Show all articles again.
+    filterArticles();
+});
 
-        // Return the cursor to the search field.
-        searchInput.focus();
-    });
-}
-
-// Display the initial article count when the page first loads.
+// Display the initial article count when the page loads.
 filterArticles();
