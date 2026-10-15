@@ -1,16 +1,67 @@
-<!-- Shared Navigation Bar For All Pages -->
-<header>
-    <div class="navbar">
-        <h1>IT Help Desk</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <nav>
-            <a href="index.html">Dashboard</a>
-            <a href="submit-ticket.html">Submit Ticket</a>
-            <a href="tickets.html">My Tickets</a>
-            <a href="knowledge-base.html">Knowledge Base</a>
-            <a href="troubleshoot.html">Troubleshoot</a>
-            <a href="profile.html">Profile</a>
-            <a href="settings.html">Settings</a>
-        </nav>
-    </div>
-</header>
+    <title>Profile | Help Desk</title>
+
+    <!-- Shared styles for all project pages -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navigation to the other Help Desk sections -->
+    <nav class="navbar">
+        <div class="logo">IT Help Desk</div>
+        <a href="index.html">Dashboard</a>
+        <a href="submit-ticket.html">Submit Ticket</a>
+        <a href="tickets.html">My Tickets</a>
+        <a href="knowledge-base.html">Knowledge Base</a>
+        <a href="troubleshoot.html">Troubleshoot</a>
+        <a href="profile.html">Profile</a>
+        <a href="settings.html">Settings</a>
+    </nav>
+
+    <main>
+        <h1>My Profile</h1>
+        <p>View and update your contact information.</p>
+
+        <!-- The form fields are loaded from and saved to localStorage -->
+        <section class="card">
+            <form id="profile-form">
+
+                <label for="profile-name">Name</label>
+                <input type="text" id="profile-name" required>
+
+                <label for="profile-email">Email</label>
+                <input type="email" id="profile-email" required>
+
+                <label for="profile-department">Department</label>
+                <input type="text" id="profile-department">
+
+                <label for="profile-phone">Phone</label>
+                <input type="tel" id="profile-phone">
+
+                <!-- Save changes or restore the last saved information -->
+                <button type="submit">Save Profile</button>
+                <button type="button" id="undo-profile">Undo Changes</button>
+
+                <!-- JavaScript writes save/undo feedback here -->
+                <p id="profile-message" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <!-- Simple note clarifying this is a demonstration profile -->
+        <section class="card">
+            <h2>Account information</h2>
+            <p>This prototype stores profile details in this browser.</p>
+        </section>
+    </main>
+
+    <!-- Loads profile behavior and the shared theme preferences -->
+    <script src="js/profile.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+</html>
