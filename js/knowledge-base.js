@@ -1,69 +1,79 @@
-// Get the search, category, reset, and status elements from the page.
-const searchInput = document.querySelector("#article-search");
-const categorySelect = document.querySelector("#article-category");
+// Find the search controls and status messages in knowledge-base.html.
+const searchInput = document.querySelector("#search");
+const categorySelect = document.querySelector("#category");
+const searchForm = document.querySelector("#search-form");
 const clearButton = document.querySelector("#clear-search");
-const articleCount = document.querySelector("#article-count");
+const resultCount = document.querySelector("#result-count");
 const noResultsMessage = document.querySelector("#no-results");
 
-// Collect all articles so the script can show or hide them.
+// Get all help articles so the script can filter them.
 const articles = document.querySelectorAll(".article");
 
-// Filter articles using the search text and selected category.
+// Filter articles using the search phrase and selected category.
 function filterArticles() {
-    // Convert the search phrase to lowercase for case-insensitive matching.
-    const searchText = searchInput.value.toLowerCase();
+    // Make the search case-insensitive.
+    const searchText = searchInput.value.toLowerCase().trim();
 
-    // Read the selected category from the dropdown.
+    // Get the selected category, such as "Network" or "Hardware".
     const selectedCategory = categorySelect.value;
 
-    // Track how many articles remain visible.
+    // Count how many articles match the filters.
     let visibleCount = 0;
 
-    // Check each article individually.
+    // Check each article.
     articles.forEach(function (article) {
+        // Include the article title and body in the text search.
         const articleText = article.textContent.toLowerCase();
+
+        // Read the category from the article's data-category attribute.
         const articleCategory = article.dataset.category;
 
-        // The article must match both the text and category filters.
+        // An article matches if its text contains the search phrase.
         const matchesSearch = articleText.includes(searchText);
+
+        // "all" matches every category; otherwise categories must match.
         const matchesCategory =
             selectedCategory === "all" ||
             articleCategory === selectedCategory;
 
-        // Show matching articles and hide articles that do not match.
+        // Show articles that match both filters.
         if (matchesSearch && matchesCategory) {
             article.hidden = false;
-            visibleCount = visibleCount + 1;
+            visibleCount++;
         } else {
+            // Hide articles that do not match.
             article.hidden = true;
         }
     });
 
-    // Update the number of matching articles.
-    articleCount.textContent =
-        "Showing " + visibleCount + " article(s)";
+    // Update the results message.
+    resultCount.textContent =
+        "Showing " + visibleCount + " article(s).";
 
-    // Display a message if the search did not find anything.
-    if (visibleCount === 0) {
-        noResultsMessage.hidden = false;
-    } else {
-        noResultsMessage.hidden = true;
-    }
+    // Show the no-results message only if nothing matched.
+    noResultsMessage.hidden = visibleCount !== 0;
 }
 
-// Refilter the articles whenever the user changes the search phrase.
+// When the user submits the search form, filter without reloading the page.
+searchForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    filterArticles();
+});
+
+// Update results as the user types.
 searchInput.addEventListener("input", filterArticles);
 
-// Refilter the articles whenever the category changes.
+// Update results when the category dropdown changes.
 categorySelect.addEventListener("change", filterArticles);
 
-// Reset both filters and show all articles again.
+// Clear the search phrase and category filter.
 clearButton.addEventListener("click", function () {
     searchInput.value = "";
     categorySelect.value = "all";
 
+    // Show all articles again.
     filterArticles();
 });
 
-// Run once when the page loads so the count is correct.
+// Display the initial article count when the page loads.
 filterArticles();

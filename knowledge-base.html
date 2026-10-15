@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Page encoding and responsive layout settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>IT Help Desk - Knowledge Base</title>
+
+    <!-- Shared styles for the Help Desk website -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+<!-- Shared site header and navigation -->
 <header>
     <div class="navbar">
         <h1>IT Help Desk</h1>
+
         <nav>
             <a href="index.html">Dashboard</a>
             <a href="submit-ticket.html">Submit Ticket</a>
@@ -24,11 +30,13 @@
 </header>
 
 <main>
+    <!-- Page heading and description -->
     <h2 class="page-title">Knowledge Base</h2>
     <p class="page-description">
         Find answers to common IT problems before submitting a support ticket.
     </p>
 
+    <!-- Search form: its IDs must match knowledge-base.js -->
     <section class="card">
         <h2>Find an Article</h2>
 
@@ -53,14 +61,24 @@
                 </select>
             </div>
 
+            <!-- Submitting this form runs the article search -->
             <button type="submit">Search Articles</button>
-            <button type="button" id="clear-search"
-                    class="button-secondary">Clear Search</button>
+
+            <!-- This button resets the search and category filter -->
+            <button
+                type="button"
+                id="clear-search"
+                class="button-secondary"
+            >
+                Clear Search
+            </button>
         </form>
 
+        <!-- JavaScript updates this with the number of matching articles -->
         <p id="result-count" role="status" aria-live="polite"></p>
     </section>
 
+    <!-- Articles that can be filtered by text and category -->
     <section class="card">
         <h2>Help Articles</h2>
 
@@ -141,11 +159,13 @@
             </article>
         </div>
 
+        <!-- Shown by JavaScript when no articles match -->
         <p id="no-results" hidden>
             No matching articles found. Try another search or category.
         </p>
     </section>
 
+    <!-- Link to the ticket form if the articles don't resolve the issue -->
     <section class="card">
         <h2>Still Need Help?</h2>
         <p>
@@ -155,7 +175,9 @@
     </section>
 </main>
 
+<!-- Load the search behavior and shared saved-theme behavior -->
 <script src="js/knowledge-base.js"></script>
 <script src="js/settings.js"></script>
+
 </body>
 </html>
