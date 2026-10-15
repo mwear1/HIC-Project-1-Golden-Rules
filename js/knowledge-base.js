@@ -1,72 +1,61 @@
-// Find the search controls and status messages in knowledge-base.html.
+// Find the search controls and status messages.
 const searchInput = document.querySelector("#search");
 const searchForm = document.querySelector("#search-form");
 const clearButton = document.querySelector("#clear-search");
 const resultCount = document.querySelector("#result-count");
 const noResultsMessage = document.querySelector("#no-results");
+const articles = document.querySelectorAll("#articles .article");
 
-// Get all help articles so the script can filter them.
-const articles = document.querySelectorAll(".article");
-
-// Filter articles only when the user submits the search form.
+// Filter articles only after the user submits the search form.
 function filterArticles() {
-    // Make the search case-insensitive and remove extra spaces.
+    // Read the search phrase without regard to capitalization.
     const searchText = searchInput.value.toLowerCase().trim();
 
-    // Count how many articles match the search.
+    // Track the number of matching articles.
     let visibleCount = 0;
 
-    // Check each article against the search phrase.
+    // Check every article against the submitted search phrase.
     articles.forEach(function (article) {
-        // Include the article title and body in the text search.
         const articleText = article.textContent.toLowerCase();
-
-        // Check whether the article contains the search phrase.
-        // An empty search phrase matches every article.
         const matchesSearch = articleText.includes(searchText);
 
-        // Show matching articles and hide articles that do not match.
+        // Show matching articles and hide nonmatching articles.
         article.hidden = !matchesSearch;
 
-        // Count the articles that match the search.
         if (matchesSearch) {
             visibleCount++;
         }
     });
 
-    // Update the number of articles found.
+    // Update the number of matching articles.
     resultCount.textContent =
         "Showing " + visibleCount + " article(s).";
 
-    // Display a message if no articles match the search.
+    // Display a message if no articles match.
     noResultsMessage.hidden = visibleCount !== 0;
 }
 
-// Run the search only when the user presses the Search button.
+// Search only when the form is submitted using the Search button
+// or the Enter key. Typing alone does not trigger a search.
 searchForm.addEventListener("submit", function (event) {
-    // Prevent the browser from reloading the page.
     event.preventDefault();
-
-    // Filter the articles using the submitted search phrase.
     filterArticles();
 });
 
-// Clear the search phrase and display all articles again.
+// Clear the search and restore every article.
 clearButton.addEventListener("click", function () {
     // Empty the search field.
     searchInput.value = "";
 
-    // Show every article.
+    // Make all articles visible again.
     articles.forEach(function (article) {
         article.hidden = false;
     });
 
     // Reset the result count and hide the no-results message.
     resultCount.textContent =
-        "Showing " + articles.length + " article(s).";
+        "Showing all " + articles.length + " articles.";
 
     noResultsMessage.hidden = true;
-
-    // Place the cursor back in the search field.
     searchInput.focus();
 });
