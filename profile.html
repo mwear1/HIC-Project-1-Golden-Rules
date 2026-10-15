@@ -1,67 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Basic page setup -->
+    <!-- Set character encoding and make the page responsive -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Profile | Help Desk</title>
+    <title>IT Help Desk - Profile</title>
 
-    <!-- Shared styles for all project pages -->
+    <!-- Use the same shared stylesheet as the other pages -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- Navigation to the other Help Desk sections -->
-    <nav class="navbar">
-        <div class="logo">IT Help Desk</div>
-        <a href="index.html">Dashboard</a>
-        <a href="submit-ticket.html">Submit Ticket</a>
-        <a href="tickets.html">My Tickets</a>
-        <a href="knowledge-base.html">Knowledge Base</a>
-        <a href="troubleshoot.html">Troubleshoot</a>
-        <a href="profile.html">Profile</a>
-        <a href="settings.html">Settings</a>
-    </nav>
+<!-- Shared header/banner structure, matching knowledge-base.html -->
+<header>
+    <div class="navbar">
+        <h1>IT Help Desk</h1>
 
-    <main>
-        <h1>My Profile</h1>
-        <p>View and update your contact information.</p>
+        <!-- Navigation links to the other Help Desk pages -->
+        <nav>
+            <a href="index.html">Dashboard</a>
+            <a href="submit-ticket.html">Submit Ticket</a>
+            <a href="tickets.html">My Tickets</a>
+            <a href="knowledge-base.html">Knowledge Base</a>
+            <a href="troubleshoot.html">Troubleshoot</a>
+            <a href="profile.html">Profile</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+    </div>
+</header>
 
-        <!-- The form fields are loaded from and saved to localStorage -->
-        <section class="card">
-            <form id="profile-form">
+<main>
+    <!-- Page title and description -->
+    <h2 class="page-title">My Profile</h2>
+    <p class="page-description">
+        View and update your contact information.
+    </p>
 
+    <!-- Profile form appears inside a shared card -->
+    <section class="card">
+        <h2>Profile Information</h2>
+
+        <form id="profile-form">
+            <div class="form-group">
                 <label for="profile-name">Name</label>
-                <input type="text" id="profile-name" required>
+                <input
+                    type="text"
+                    id="profile-name"
+                    placeholder="Enter your name"
+                    required
+                >
+            </div>
 
+            <div class="form-group">
                 <label for="profile-email">Email</label>
-                <input type="email" id="profile-email" required>
+                <input
+                    type="email"
+                    id="profile-email"
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
 
+            <div class="form-group">
                 <label for="profile-department">Department</label>
-                <input type="text" id="profile-department">
+                <input
+                    type="text"
+                    id="profile-department"
+                    placeholder="Enter your department"
+                >
+            </div>
 
+            <div class="form-group">
                 <label for="profile-phone">Phone</label>
-                <input type="tel" id="profile-phone">
+                <input
+                    type="tel"
+                    id="profile-phone"
+                    placeholder="Enter your phone number"
+                >
+            </div>
 
-                <!-- Save changes or restore the last saved information -->
-                <button type="submit">Save Profile</button>
-                <button type="button" id="undo-profile">Undo Changes</button>
+            <!-- Submit saves the entered information -->
+            <button type="submit">Save Profile</button>
 
-                <!-- JavaScript writes save/undo feedback here -->
-                <p id="profile-message" aria-live="polite"></p>
-            </form>
-        </section>
+            <!-- Undo reloads the most recently saved information -->
+            <button
+                type="button"
+                id="undo-profile"
+                class="button-secondary"
+            >
+                Undo Changes
+            </button>
 
-        <!-- Simple note clarifying this is a demonstration profile -->
-        <section class="card">
-            <h2>Account information</h2>
-            <p>This prototype stores profile details in this browser.</p>
-        </section>
-    </main>
+            <!-- JavaScript displays confirmation or undo feedback here -->
+            <p id="profile-message" role="status" aria-live="polite"></p>
+        </form>
+    </section>
 
-    <!-- Loads profile behavior and the shared theme preferences -->
-    <script src="js/profile.js"></script>
-    <script src="js/settings.js"></script>
+    <!-- Explain how the prototype stores profile information -->
+    <section class="card">
+        <h2>Account Information</h2>
+        <p>
+            This is a project prototype. Profile changes are saved in
+            this browser and are not sent to an actual IT system.
+        </p>
+    </section>
+</main>
+
+<script>
+    // Get the form and its input fields.
+    const profileForm = document.querySelector("#profile-form");
+    const nameField = document.querySelector("#profile-name");
+    const emailField = document.querySelector("#profile-email");
+    const departmentField = document.querySelector("#profile-department");
+    const phoneField = document.querySelector("#profile-phone");
+
+    // Get the Undo button and the message area.
+    const undoButton = document.querySelector("#undo-profile");
+    const profileMessage = document.querySelector("#profile-message");
+
+    // This is the localStorage key where the profile is stored.
+    const profileStorageKey = "helpDeskProfile";
+
+    // Load the last saved profile into the form.
+    function loadProfile() {
+        const savedProfile = localStorage.getItem(profileStorageKey);
+
+        // Only fill the form if a saved profile exists.
+        if (savedProfile !== null) {
+            const profile = JSON.parse(savedProfile);
+
+            nameField.value = profile.name || "";
+            emailField.value = profile.email || "";
+            departmentField.value = profile.department || "";
+            phoneField.value = profile.phone || "";
+        }
+    }
+
+    // Save the current form values to localStorage.
+    function saveProfile() {
+        const profile = {
+            name: nameField.value,
+            email: emailField.value,
+            department: departmentField.value,
+            phone: phoneField.value
+        };
+
+        // localStorage stores strings, so convert the object to JSON text.
+        localStorage.setItem(
+            profileStorageKey,
+            JSON.stringify(profile)
+        );
+
+        // Let the user know the save completed.
+        profileMessage.textContent = "Profile saved.";
+    }
+
+    // Handle form submission without refreshing the page.
+    profileForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // The required fields and email input are checked by the browser.
+        saveProfile();
+    });
+
+    // Undo edits by restoring the last saved profile.
+    undoButton.addEventListener("click", function () {
+        loadProfile();
+        profileMessage.textContent = "Changes undone.";
+    });
+
+    // Fill the form with saved information when the page opens.
+    loadProfile();
+</script>
+
+<!-- Apply the user's saved site theme, as on the other pages -->
+<script src="js/settings.js"></script>
+
 </body>
 </html>
