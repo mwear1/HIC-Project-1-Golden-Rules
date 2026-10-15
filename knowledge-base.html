@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Page encoding and responsive layout settings -->
+    <!-- Set the character encoding and responsive page layout. -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Set the page title and load the shared stylesheet. -->
     <title>IT Help Desk - Knowledge Base</title>
-
-    <!-- Shared styles for the Help Desk website -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- Shared site header and navigation -->
 <header>
+    <!-- Shared navigation links used throughout the Help Desk website. -->
     <div class="navbar">
         <h1>IT Help Desk</h1>
 
@@ -21,7 +20,7 @@
             <a href="index.html">Dashboard</a>
             <a href="submit-ticket.html">Submit Ticket</a>
             <a href="tickets.html">My Tickets</a>
-            <a href="knowledge-base.html">Knowledge Base</a>
+            <a href="knowledge-base.html" aria-current="page">Knowledge Base</a>
             <a href="troubleshoot.html">Troubleshoot</a>
             <a href="profile.html">Profile</a>
             <a href="settings.html">Settings</a>
@@ -30,154 +29,155 @@
 </header>
 
 <main>
-    <!-- Page heading and description -->
+    <!-- Page heading and a short explanation of the Knowledge Base. -->
     <h2 class="page-title">Knowledge Base</h2>
+
     <p class="page-description">
-        Find answers to common IT problems before submitting a support ticket.
+        Search help articles for answers to common IT questions and problems.
     </p>
 
-    <!-- Search form: its IDs must match knowledge-base.js -->
+    <!-- Search form lets users search article titles and descriptions. -->
     <section class="card">
         <h2>Find an Article</h2>
 
         <form id="search-form">
-            <div class="form-group">
-                <label for="search">Search Help Articles</label>
-                <input
-                    type="search"
-                    id="search"
-                    placeholder="Try passwords, Wi-Fi, or printers"
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="category">Filter by Category</label>
-                <select id="category">
-                    <option value="all">All Categories</option>
-                    <option value="Account">Accounts</option>
-                    <option value="Network">Network</option>
-                    <option value="Hardware">Hardware</option>
-                    <option value="Software">Software</option>
-                </select>
-            </div>
-
-            <!-- Submitting this form runs the article search -->
-            <button type="submit">Search Articles</button>
-
-            <!-- This button resets the search and category filter -->
-            <button
-                type="button"
-                id="clear-search"
-                class="button-secondary"
+            <!-- Search text entered by the user. -->
+            <label for="search">Search articles</label>
+            <input
+                type="search"
+                id="search"
+                name="search"
+                placeholder="Try Wi-Fi, password, or printer..."
             >
+
+            <!-- Category dropdown filters the available articles. -->
+            <label for="category">Filter by category</label>
+            <select id="category" name="category">
+                <option value="all">All Categories</option>
+                <option value="accounts">Accounts &amp; Passwords</option>
+                <option value="network">Network &amp; Wi-Fi</option>
+                <option value="hardware">Hardware &amp; Printers</option>
+                <option value="software">Software</option>
+            </select>
+
+            <!-- Submit and clear buttons for the search controls. -->
+            <button type="submit">Search</button>
+            <button type="button" id="clear-search" class="button-secondary">
                 Clear Search
             </button>
         </form>
 
-        <!-- JavaScript updates this with the number of matching articles -->
+        <!-- JavaScript updates this text with the number of matching articles. -->
         <p id="result-count" role="status" aria-live="polite"></p>
     </section>
 
-    <!-- Articles that can be filtered by text and category -->
+    <!-- Articles are filtered by the Knowledge Base JavaScript. -->
     <section class="card">
         <h2>Help Articles</h2>
 
         <div id="articles">
-            <article class="article" data-category="Network">
-                <details>
-                    <summary>How do I connect to Wi-Fi?</summary>
-                    <span class="category-label">Network</span>
-                    <p>
-                        Open your device's Wi-Fi settings, select your
-                        school or workplace network, and enter your credentials
-                        if requested. If it fails, reconnect and check that
-                        airplane mode is off.
-                    </p>
-                </details>
+            <!-- Article: account and password help. -->
+            <article class="article" data-category="accounts">
+                <h3>How to Reset Your Password</h3>
+                <p>
+                    If you forgot your password, use the password reset option
+                    on the sign-in page. Follow the instructions to verify your
+                    identity and create a new password.
+                </p>
+                <p><strong>Category:</strong> Accounts &amp; Passwords</p>
             </article>
 
-            <article class="article" data-category="Account">
-                <details>
-                    <summary>How do I reset my password?</summary>
-                    <span class="category-label">Accounts</span>
-                    <p>
-                        Use your organization's official password-reset page
-                        and follow the identity verification steps. Never
-                        share your password or verification codes.
-                    </p>
-                </details>
+            <!-- Article: account access and login problems. -->
+            <article class="article" data-category="accounts">
+                <h3>What to Do if Your Account Is Locked</h3>
+                <p>
+                    Multiple unsuccessful login attempts may lock your account.
+                    Wait for the lockout period to end or contact the IT Help
+                    Desk if you still cannot sign in.
+                </p>
+                <p><strong>Category:</strong> Accounts &amp; Passwords</p>
             </article>
 
-            <article class="article" data-category="Hardware">
-                <details>
-                    <summary>What if my printer is not working?</summary>
-                    <span class="category-label">Hardware</span>
-                    <p>
-                        Check that the printer is powered on, has paper,
-                        and is connected. Confirm that you selected the
-                        correct printer, then try again. Contact IT if the
-                        problem continues.
-                    </p>
-                </details>
+            <!-- Article: wireless network troubleshooting. -->
+            <article class="article" data-category="network">
+                <h3>How to Connect to Wi-Fi</h3>
+                <p>
+                    Open your device's Wi-Fi settings, select the appropriate
+                    network, and enter your credentials if prompted. If the
+                    connection fails, reconnect and verify your login details.
+                </p>
+                <p><strong>Category:</strong> Network &amp; Wi-Fi</p>
             </article>
 
-            <article class="article" data-category="Software">
-                <details>
-                    <summary>What if an application freezes?</summary>
-                    <span class="category-label">Software</span>
-                    <p>
-                        Wait briefly and save your work if possible.
-                        Close and reopen the application. If it remains
-                        frozen, restart your device or submit a ticket.
-                    </p>
-                </details>
+            <!-- Article: resolving common internet connection problems. -->
+            <article class="article" data-category="network">
+                <h3>Fixing a Slow or Unavailable Internet Connection</h3>
+                <p>
+                    Check whether Wi-Fi is enabled, move closer to the router,
+                    and reconnect to the network. Restart your device if the
+                    problem continues.
+                </p>
+                <p><strong>Category:</strong> Network &amp; Wi-Fi</p>
             </article>
 
-            <article class="article" data-category="Network">
-                <details>
-                    <summary>Why is my internet connection slow?</summary>
-                    <span class="category-label">Network</span>
-                    <p>
-                        Check whether other websites are slow, reconnect
-                        to Wi-Fi, and pause unnecessary downloads. If multiple
-                        devices are affected, report the issue to IT.
-                    </p>
-                </details>
+            <!-- Article: printer troubleshooting. -->
+            <article class="article" data-category="hardware">
+                <h3>How to Fix a Printer That Will Not Print</h3>
+                <p>
+                    Check that the printer is powered on, connected, and has
+                    paper. Check for paper jams or error messages, and make
+                    sure the correct printer is selected.
+                </p>
+                <p><strong>Category:</strong> Hardware &amp; Printers</p>
             </article>
 
-            <article class="article" data-category="Account">
-                <details>
-                    <summary>What should I do about a suspicious email?</summary>
-                    <span class="category-label">Accounts</span>
-                    <p>
-                        Do not click suspicious links or open unexpected
-                        attachments. Check the sender's actual email address
-                        and report the message using your organization's
-                        approved process.
-                    </p>
-                </details>
+            <!-- Article: basic computer hardware troubleshooting. -->
+            <article class="article" data-category="hardware">
+                <h3>What to Do if Your Computer Will Not Turn On</h3>
+                <p>
+                    Check the power cable and outlet. For a laptop, connect the
+                    charger and allow the battery to charge before trying again.
+                    Contact IT support if the computer still will not start.
+                </p>
+                <p><strong>Category:</strong> Hardware &amp; Printers</p>
+            </article>
+
+            <!-- Article: application installation and update problems. -->
+            <article class="article" data-category="software">
+                <h3>How to Troubleshoot Software Problems</h3>
+                <p>
+                    Close and reopen the application, restart your device, and
+                    check for available updates. If the application continues
+                    to fail, record any error message and contact IT support.
+                </p>
+                <p><strong>Category:</strong> Software</p>
+            </article>
+
+            <!-- Article: common application update guidance. -->
+            <article class="article" data-category="software">
+                <h3>How to Update Your Software</h3>
+                <p>
+                    Open the application's settings or help menu and look for
+                    an update option. Install approved updates and restart the
+                    application if necessary.
+                </p>
+                <p><strong>Category:</strong> Software</p>
             </article>
         </div>
 
-        <!-- Shown by JavaScript when no articles match -->
+        <!-- JavaScript displays this message when no articles match. -->
         <p id="no-results" hidden>
-            No matching articles found. Try another search or category.
+            No articles match your search. Try different keywords or choose
+            another category.
         </p>
-    </section>
-
-    <!-- Link to the ticket form if the articles don't resolve the issue -->
-    <section class="card">
-        <h2>Still Need Help?</h2>
-        <p>
-            If these solutions do not solve your problem, submit a support ticket.
-        </p>
-        <a href="submit-ticket.html" class="button">Submit a Ticket</a>
     </section>
 </main>
 
-<!-- Load the search behavior and shared saved-theme behavior -->
-<script src="js/knowledge-base.js"></script>
+<!-- Load settings first so saved appearance preferences are applied. -->
 <script src="js/settings.js"></script>
+
+<!-- Load the script that searches and filters Knowledge Base articles. -->
+<script src="js/knowledge-base.js"></script>
 
 </body>
 </html>
