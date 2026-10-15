@@ -5,6 +5,8 @@ function getTickets() {
     if (savedTickets) {
         return JSON.parse(savedTickets);
     }
+
+    return [];
 }
 
 
@@ -178,6 +180,11 @@ function loadDashboard() {
 function showTickets(){
     const tickets = getTickets();
     const list = document.getElementById("ticketList");
+
+    // Only run this code if we are on the My Tickets page.
+    if (!list) {
+        return;
+    }
 
     for (let i = 0; i < tickets.length; i++) {
         const ticketEntry = document.createElement("div");
