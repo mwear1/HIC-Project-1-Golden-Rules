@@ -50,34 +50,31 @@
                 placeholder="Try Wi-Fi, password, or printer..."
             >
 
-            <!-- Category dropdown filters the available articles. -->
-            <label for="category">Filter by category</label>
-            <select id="category" name="category">
-                <option value="all">All Categories</option>
-                <option value="accounts">Accounts &amp; Passwords</option>
-                <option value="network">Network &amp; Wi-Fi</option>
-                <option value="hardware">Hardware &amp; Printers</option>
-                <option value="software">Software</option>
-            </select>
-
-            <!-- Submit and clear buttons for the search controls. -->
+            <!-- Submit the search or clear the current search. -->
             <button type="submit">Search</button>
-            <button type="button" id="clear-search" class="button-secondary">
+
+            <button
+                type="button"
+                id="clear-search"
+                class="button-secondary"
+            >
                 Clear Search
             </button>
         </form>
 
-        <!-- JavaScript updates this text with the number of matching articles. -->
-        <p id="result-count" role="status" aria-live="polite"></p>
+        <!-- JavaScript updates this text after a search is submitted. -->
+        <p id="result-count" role="status" aria-live="polite">
+            Showing all articles.
+        </p>
     </section>
 
-    <!-- Articles are filtered by the Knowledge Base JavaScript. -->
+    <!-- The JavaScript searches and filters these help articles. -->
     <section class="card">
         <h2>Help Articles</h2>
 
         <div id="articles">
             <!-- Article: account and password help. -->
-            <article class="article" data-category="accounts">
+            <article class="article">
                 <h3>How to Reset Your Password</h3>
                 <p>
                     If you forgot your password, use the password reset option
@@ -88,7 +85,7 @@
             </article>
 
             <!-- Article: account access and login problems. -->
-            <article class="article" data-category="accounts">
+            <article class="article">
                 <h3>What to Do if Your Account Is Locked</h3>
                 <p>
                     Multiple unsuccessful login attempts may lock your account.
@@ -99,7 +96,7 @@
             </article>
 
             <!-- Article: wireless network troubleshooting. -->
-            <article class="article" data-category="network">
+            <article class="article">
                 <h3>How to Connect to Wi-Fi</h3>
                 <p>
                     Open your device's Wi-Fi settings, select the appropriate
@@ -110,7 +107,7 @@
             </article>
 
             <!-- Article: resolving common internet connection problems. -->
-            <article class="article" data-category="network">
+            <article class="article">
                 <h3>Fixing a Slow or Unavailable Internet Connection</h3>
                 <p>
                     Check whether Wi-Fi is enabled, move closer to the router,
@@ -121,7 +118,7 @@
             </article>
 
             <!-- Article: printer troubleshooting. -->
-            <article class="article" data-category="hardware">
+            <article class="article">
                 <h3>How to Fix a Printer That Will Not Print</h3>
                 <p>
                     Check that the printer is powered on, connected, and has
@@ -132,7 +129,7 @@
             </article>
 
             <!-- Article: basic computer hardware troubleshooting. -->
-            <article class="article" data-category="hardware">
+            <article class="article">
                 <h3>What to Do if Your Computer Will Not Turn On</h3>
                 <p>
                     Check the power cable and outlet. For a laptop, connect the
@@ -142,8 +139,8 @@
                 <p><strong>Category:</strong> Hardware &amp; Printers</p>
             </article>
 
-            <!-- Article: application installation and update problems. -->
-            <article class="article" data-category="software">
+            <!-- Article: application troubleshooting. -->
+            <article class="article">
                 <h3>How to Troubleshoot Software Problems</h3>
                 <p>
                     Close and reopen the application, restart your device, and
@@ -154,7 +151,7 @@
             </article>
 
             <!-- Article: common application update guidance. -->
-            <article class="article" data-category="software">
+            <article class="article">
                 <h3>How to Update Your Software</h3>
                 <p>
                     Open the application's settings or help menu and look for
@@ -167,16 +164,15 @@
 
         <!-- JavaScript displays this message when no articles match. -->
         <p id="no-results" hidden>
-            No articles match your search. Try different keywords or choose
-            another category.
+            No articles match your search. Try different keywords.
         </p>
     </section>
 </main>
 
-<!-- Load settings first so saved appearance preferences are applied. -->
+<!-- Apply saved appearance preferences. -->
 <script src="js/settings.js"></script>
 
-<!-- Load the script that searches and filters Knowledge Base articles. -->
+<!-- Load the Knowledge Base search functionality. -->
 <script src="js/knowledge-base.js"></script>
 
 </body>
