@@ -30,7 +30,7 @@
         Search help articles for answers to common IT questions and problems.
     </p>
 
-    <!-- Search runs only when the user submits this form. -->
+    <!-- Search controls. Searching happens when Search is clicked. -->
     <section class="card">
         <h2>Find an Article</h2>
 
@@ -43,8 +43,14 @@
                 placeholder="Try Wi-Fi, password, or printer..."
             >
 
-            <button type="submit">Search</button>
-            <button type="button" id="clear-search" class="button-secondary">
+            <!-- The button has its own ID so JavaScript can find it. -->
+            <button type="submit" id="search-button">Search</button>
+
+            <button
+                type="button"
+                id="clear-search"
+                class="button-secondary"
+            >
                 Clear Search
             </button>
         </form>
@@ -54,7 +60,7 @@
         </p>
     </section>
 
-    <!-- Articles are displayed until a search is submitted. -->
+    <!-- Help articles searched by the JavaScript. -->
     <section class="card">
         <h2>Help Articles</h2>
 
@@ -140,17 +146,15 @@
             </article>
         </div>
 
-        <!-- This message appears when a submitted search finds no matches. -->
+        <!-- Shown when no articles match the submitted search. -->
         <p id="no-results" hidden>
             No articles match your search. Try different keywords.
         </p>
     </section>
 </main>
 
-<!-- Load the saved site appearance settings. -->
+<!-- Load site settings and Knowledge Base functionality. -->
 <script src="js/settings.js"></script>
-
-<!-- Load the manual-search version of the Knowledge Base script. -->
 <script src="js/knowledge-base.js"></script>
 
 </body>
