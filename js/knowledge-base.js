@@ -1,4 +1,4 @@
-// Find the Knowledge Base search controls and article elements.
+// Find the Knowledge Base controls and status messages.
 const searchForm = document.querySelector("#search-form");
 const searchInput = document.querySelector("#search");
 const categorySelect = document.querySelector("#category");
@@ -7,92 +7,96 @@ const resultCount = document.querySelector("#result-count");
 const articlesContainer = document.querySelector("#articles");
 const noResultsMessage = document.querySelector("#no-results");
 
-// Get all articles displayed inside the articles container.
+// Get all help articles inside the article container.
 const articles = articlesContainer
     ? Array.from(articlesContainer.querySelectorAll(".article"))
     : [];
 
-// Search articles by their text and the selected category.
-function filterArticles() {
-    // Convert the search text to lowercase for case-insensitive matching.
-    const searchText = searchInput.value.trim().toLowerCase();
+// Check that the required HTML elements exist before adding event listeners.
+if (
+    searchForm &&
+    searchInput &&
+    categorySelect &&
+    clearSearchButton &&
+    resultCount &&
+    noResultsMessage &&
+    articlesContainer
+) {
+    // Set the initial count without filtering any articles.
+    resultCount.textContent =
+        "Showing all " + articles.length + " articles.";
 
-    // Read the selected category from the dropdown.
-    const selectedCategory = categorySelect.value;
-
-    // Track how many articles match the current filters.
-    let visibleCount = 0;
-
-    // Check each article against the search text and category.
-    articles.forEach(function (article) {
-        // Read the article's text and category.
-        const articleText = article.textContent.toLowerCase();
-        const articleCategory = article.dataset.category;
-
-        // An article matches if its text contains the search term.
-        const matchesSearch = articleText.includes(searchText);
-
-        // The "all" option allows every category.
-        const matchesCategory =
-            selectedCategory === "all" ||
-            articleCategory === selectedCategory;
-
-        // Show the article only when it matches both filters.
-        const shouldShow = matchesSearch && matchesCategory;
-
-        article.hidden = !shouldShow;
-
-        // Count articles that remain visible.
-        if (shouldShow) {
-            visibleCount++;
-        }
-    });
-
-    // Update the number of matching articles.
-    if (resultCount !== null) {
-        resultCount.textContent =
-            visibleCount + (visibleCount === 1
-                ? " article found."
-                : " articles found.");
-    }
-
-    // Show a message when no articles match.
-    if (noResultsMessage !== null) {
-        noResultsMessage.hidden = visibleCount !== 0;
-    }
-}
-
-// Prevent the form from reloading the page when Search is clicked.
-if (searchForm !== null) {
+    // Search and filter only when the form is submitted.
     searchForm.addEventListener("submit", function (event) {
+        // Prevent the browser from reloading the page.
         event.preventDefault();
-        filterArticles();
+
+        // Read the submitted search phrase.
+        const searchText = searchInput.value.trim().toLowerCase();
+
+        // Read the selected category.
+        const selectedCategory = categorySelect.value;
+
+        // Count the articles matching both conditions.
+        let visibleCount = 0;
+
+        // Check each article against the submitted search and category.
+        articles.forEach(function (article) {
+            const articleText = article.textContent.toLowerCase();
+            const articleCategory = article.dataset.category;
+
+            // Match the search phrase. An empty phrase matches all text.
+            const matchesSearch = articleText.includes(searchText);
+
+            // Match the selected category or allow all categories.
+            const matchesCategory =
+                selectedCategory === "all" ||
+                articleCategory === selectedCategory;
+
+            // An article must match both conditions to remain visible.
+            const shouldShow = matchesSearch && matchesCategory;
+
+            article.hidden = !shouldShow;
+
+            if (shouldShow) {
+                visibleCount++;
+            }
+        });
+
+        // Display the number of matching articles.
+        resultCount.textContent =
+            "Showing " + visibleCount +
+            (visibleCount === 1 ? " article." : " articles.");
+
+        // Display a message if the search has no matches.
+        noResultsMessage.hidden = visibleCount !== 0;
     });
-}
 
-// Update results as the user types in the search field.
-if (searchInput !== null) {
-    searchInput.addEventListener("input", filterArticles);
-}
-
-// Update results whenever the selected category changes.
-if (categorySelect !== null) {
-    categorySelect.addEventListener("change", filterArticles);
-}
-
-// Clear the search text and restore all articles.
-if (clearSearchButton !== null) {
+    // Clear the search and restore every article.
     clearSearchButton.addEventListener("click", function () {
+        // Reset both search controls.
         searchInput.value = "";
         categorySelect.value = "all";
 
-        // Refresh the results after clearing the filters.
-        filterArticles();
+        // Make all articles visible again.
+        articles.forEach(function (article) {
+            article.hidden = false;
+        });
 
-        // Return the cursor to the search field.
+        // Reset the count and hide the no-results message.
+        resultCount.textContent =
+            "Showing all " + articles.length + " articles.";
+
+        noResultsMessage.hidden = true;
+
+        // Return focus to the search input.
         searchInput.focus();
     });
+} else {
+    // Identify missing elements in the browser console.
+    console.error(
+        "Knowledge Base search could not start. Check the IDs for the " +
+        "search form, search input, category dropdown, clear button, " +
+        "result count, articles container, and no-results message."
+    );
 }
-
-// Display the initial article count when the page first loads.
-filterArticles();
