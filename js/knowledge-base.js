@@ -1,69 +1,183 @@
-// Get the search, category, reset, and status elements from the page.
-const searchInput = document.querySelector("#article-search");
-const categorySelect = document.querySelector("#article-category");
-const clearButton = document.querySelector("#clear-search");
-const articleCount = document.querySelector("#article-count");
-const noResultsMessage = document.querySelector("#no-results");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Page encoding and responsive layout settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-// Collect all articles so the script can show or hide them.
-const articles = document.querySelectorAll(".article");
+    <title>IT Help Desk - Knowledge Base</title>
 
-// Filter articles using the search text and selected category.
-function filterArticles() {
-    // Convert the search phrase to lowercase for case-insensitive matching.
-    const searchText = searchInput.value.toLowerCase();
+    <!-- Shared styles for the Help Desk website -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-    // Read the selected category from the dropdown.
-    const selectedCategory = categorySelect.value;
+<!-- Shared site header and navigation -->
+<header>
+    <div class="navbar">
+        <h1>IT Help Desk</h1>
 
-    // Track how many articles remain visible.
-    let visibleCount = 0;
+        <nav>
+            <a href="index.html">Dashboard</a>
+            <a href="submit-ticket.html">Submit Ticket</a>
+            <a href="tickets.html">My Tickets</a>
+            <a href="knowledge-base.html">Knowledge Base</a>
+            <a href="troubleshoot.html">Troubleshoot</a>
+            <a href="profile.html">Profile</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+    </div>
+</header>
 
-    // Check each article individually.
-    articles.forEach(function (article) {
-        const articleText = article.textContent.toLowerCase();
-        const articleCategory = article.dataset.category;
+<main>
+    <!-- Page heading and description -->
+    <h2 class="page-title">Knowledge Base</h2>
+    <p class="page-description">
+        Find answers to common IT problems before submitting a support ticket.
+    </p>
 
-        // The article must match both the text and category filters.
-        const matchesSearch = articleText.includes(searchText);
-        const matchesCategory =
-            selectedCategory === "all" ||
-            articleCategory === selectedCategory;
+    <!-- Search form: its IDs must match knowledge-base.js -->
+    <section class="card">
+        <h2>Find an Article</h2>
 
-        // Show matching articles and hide articles that do not match.
-        if (matchesSearch && matchesCategory) {
-            article.hidden = false;
-            visibleCount = visibleCount + 1;
-        } else {
-            article.hidden = true;
-        }
-    });
+        <form id="search-form">
+            <div class="form-group">
+                <label for="search">Search Help Articles</label>
+                <input
+                    type="search"
+                    id="search"
+                    placeholder="Try passwords, Wi-Fi, or printers"
+                >
+            </div>
 
-    // Update the number of matching articles.
-    articleCount.textContent =
-        "Showing " + visibleCount + " article(s)";
+            <div class="form-group">
+                <label for="category">Filter by Category</label>
+                <select id="category">
+                    <option value="all">All Categories</option>
+                    <option value="Account">Accounts</option>
+                    <option value="Network">Network</option>
+                    <option value="Hardware">Hardware</option>
+                    <option value="Software">Software</option>
+                </select>
+            </div>
 
-    // Display a message if the search did not find anything.
-    if (visibleCount === 0) {
-        noResultsMessage.hidden = false;
-    } else {
-        noResultsMessage.hidden = true;
-    }
-}
+            <!-- Submitting this form runs the article search -->
+            <button type="submit">Search Articles</button>
 
-// Refilter the articles whenever the user changes the search phrase.
-searchInput.addEventListener("input", filterArticles);
+            <!-- This button resets the search and category filter -->
+            <button
+                type="button"
+                id="clear-search"
+                class="button-secondary"
+            >
+                Clear Search
+            </button>
+        </form>
 
-// Refilter the articles whenever the category changes.
-categorySelect.addEventListener("change", filterArticles);
+        <!-- JavaScript updates this with the number of matching articles -->
+        <p id="result-count" role="status" aria-live="polite"></p>
+    </section>
 
-// Reset both filters and show all articles again.
-clearButton.addEventListener("click", function () {
-    searchInput.value = "";
-    categorySelect.value = "all";
+    <!-- Articles that can be filtered by text and category -->
+    <section class="card">
+        <h2>Help Articles</h2>
 
-    filterArticles();
-});
+        <div id="articles">
+            <article class="article" data-category="Network">
+                <details>
+                    <summary>How do I connect to Wi-Fi?</summary>
+                    <span class="category-label">Network</span>
+                    <p>
+                        Open your device's Wi-Fi settings, select your
+                        school or workplace network, and enter your credentials
+                        if requested. If it fails, reconnect and check that
+                        airplane mode is off.
+                    </p>
+                </details>
+            </article>
 
-// Run once when the page loads so the count is correct.
-filterArticles();
+            <article class="article" data-category="Account">
+                <details>
+                    <summary>How do I reset my password?</summary>
+                    <span class="category-label">Accounts</span>
+                    <p>
+                        Use your organization's official password-reset page
+                        and follow the identity verification steps. Never
+                        share your password or verification codes.
+                    </p>
+                </details>
+            </article>
+
+            <article class="article" data-category="Hardware">
+                <details>
+                    <summary>What if my printer is not working?</summary>
+                    <span class="category-label">Hardware</span>
+                    <p>
+                        Check that the printer is powered on, has paper,
+                        and is connected. Confirm that you selected the
+                        correct printer, then try again. Contact IT if the
+                        problem continues.
+                    </p>
+                </details>
+            </article>
+
+            <article class="article" data-category="Software">
+                <details>
+                    <summary>What if an application freezes?</summary>
+                    <span class="category-label">Software</span>
+                    <p>
+                        Wait briefly and save your work if possible.
+                        Close and reopen the application. If it remains
+                        frozen, restart your device or submit a ticket.
+                    </p>
+                </details>
+            </article>
+
+            <article class="article" data-category="Network">
+                <details>
+                    <summary>Why is my internet connection slow?</summary>
+                    <span class="category-label">Network</span>
+                    <p>
+                        Check whether other websites are slow, reconnect
+                        to Wi-Fi, and pause unnecessary downloads. If multiple
+                        devices are affected, report the issue to IT.
+                    </p>
+                </details>
+            </article>
+
+            <article class="article" data-category="Account">
+                <details>
+                    <summary>What should I do about a suspicious email?</summary>
+                    <span class="category-label">Accounts</span>
+                    <p>
+                        Do not click suspicious links or open unexpected
+                        attachments. Check the sender's actual email address
+                        and report the message using your organization's
+                        approved process.
+                    </p>
+                </details>
+            </article>
+        </div>
+
+        <!-- Shown by JavaScript when no articles match -->
+        <p id="no-results" hidden>
+            No matching articles found. Try another search or category.
+        </p>
+    </section>
+
+    <!-- Link to the ticket form if the articles don't resolve the issue -->
+    <section class="card">
+        <h2>Still Need Help?</h2>
+        <p>
+            If these solutions do not solve your problem, submit a support ticket.
+        </p>
+        <a href="submit-ticket.html" class="button">Submit a Ticket</a>
+    </section>
+</main>
+
+<!-- Load the search behavior and shared saved-theme behavior -->
+<script src="js/knowledge-base.js"></script>
+<script src="js/settings.js"></script>
+
+</body>
+</html>
