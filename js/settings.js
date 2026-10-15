@@ -1,15 +1,13 @@
 // Find the settings controls on the page.
-// These elements exist only on settings.html.
+// These IDs must match the IDs used in settings.html.
 const darkModeSelect = document.querySelector("#theme");
-const ticketNotificationsCheckbox =
-    document.querySelector("#ticket-updates");
-const emailNotificationsCheckbox =
-    document.querySelector("#email-notifications");
+const ticketNotificationsCheckbox = document.querySelector("#ticket-updates");
+const emailNotificationsCheckbox = document.querySelector("#email-notifications");
 const saveSettingsButton = document.querySelector("#save-settings");
 const resetSettingsButton = document.querySelector("#reset-settings");
 const settingsMessage = document.querySelector("#settings-message");
 
-// Key used to save settings in this browser.
+// Name used to store preferences in the browser.
 const settingsStorageKey = "helpDeskSettings";
 
 // Default preferences used when no saved settings exist.
@@ -19,124 +17,107 @@ const defaultSettings = {
     emailNotifications: false
 };
 
-// Apply or remove dark mode on the current page.
+// Apply the selected theme by adding or removing a CSS class on the body.
 function applyTheme(darkMode) {
     document.body.classList.toggle("dark-theme", darkMode === true);
 }
 
-// Load saved preferences and apply them to the current page.
+// Load saved settings and apply them to the page.
 function loadSettings() {
-    // Start with a copy of the default settings.
-    let settings = { ...defaultSettings };
+    // Start with the default settings.
+    let settings = defaultSettings;
 
-    // Read saved preferences from local storage.
-    try {
-        const savedSettingsText =
-            localStorage.getItem(settingsStorageKey);
+    // Retrieve previously saved preferences from local storage.
+    const savedSettingsText = localStorage.getItem(settingsStorageKey);
 
-        if (savedSettingsText !== null) {
-            // Keep defaults for any values missing from saved settings.
+    // Use saved preferences if they exist.
+    if (savedSettingsText !== null) {
+        try {
+            // Combine saved values with defaults in case a setting is missing.
             settings = {
                 ...defaultSettings,
                 ...JSON.parse(savedSettingsText)
             };
+        } catch (error) {
+            // Use defaults if the saved data cannot be read.
+            settings = defaultSettings;
         }
-    } catch (error) {
-        // Use default settings if saved preferences cannot be read.
-        settings = { ...defaultSettings };
     }
 
-    // Apply the saved theme on every page using this script.
+    // Apply the saved theme, including on pages without the settings form.
     applyTheme(settings.darkMode);
 
-    // Update the settings controls if they exist on this page.
+    // Update the theme dropdown if it exists on this page.
     if (darkModeSelect !== null) {
         darkModeSelect.value = settings.darkMode ? "dark" : "light";
     }
 
+    // Update the ticket notification checkbox if it exists.
     if (ticketNotificationsCheckbox !== null) {
-        ticketNotificationsCheckbox.checked =
-            settings.ticketNotifications;
+        ticketNotificationsCheckbox.checked = settings.ticketNotifications;
     }
 
+    // Update the email notification checkbox if it exists.
     if (emailNotificationsCheckbox !== null) {
-        emailNotificationsCheckbox.checked =
-            settings.emailNotifications;
+        emailNotificationsCheckbox.checked = settings.emailNotifications;
     }
 }
 
-// Save the current settings form values.
+// Read the settings form and save the selected preferences.
 function saveSettings() {
-    // Read the form controls and create the preferences object.
+    // Build an object containing the current form values.
     const settings = {
         darkMode: darkModeSelect.value === "dark",
         ticketNotifications: ticketNotificationsCheckbox.checked,
         emailNotifications: emailNotificationsCheckbox.checked
     };
 
-    // Save preferences in the browser.
-    try {
-        localStorage.setItem(
-            settingsStorageKey,
-            JSON.stringify(settings)
-        );
-    } catch (error) {
-        if (settingsMessage !== null) {
-            settingsMessage.textContent =
-                "Could not save settings in this browser.";
-        }
-        return;
-    }
+    // Save the preferences as a JSON string.
+    localStorage.setItem(settingsStorageKey, JSON.stringify(settings));
 
-    // Apply the chosen theme immediately.
+    // Apply the selected theme immediately.
     applyTheme(settings.darkMode);
 
-    // Show confirmation.
+    // Display a confirmation message if the message element exists.
     if (settingsMessage !== null) {
         settingsMessage.textContent = "Settings saved.";
     }
 }
 
-// Restore the default settings.
+// Restore the default preferences and save them.
 function resetSettings() {
-    // Save the defaults so they remain active on future visits.
-    try {
-        localStorage.setItem(
-            settingsStorageKey,
-            JSON.stringify(defaultSettings)
-        );
-    } catch (error) {
-        if (settingsMessage !== null) {
-            settingsMessage.textContent =
-                "Could not save the default settings.";
-        }
-        return;
-    }
+    // Save the default settings to local storage.
+    localStorage.setItem(
+        settingsStorageKey,
+        JSON.stringify(defaultSettings)
+    );
 
-    // Update the theme and controls.
+    // Update the controls and theme to match the defaults.
     loadSettings();
 
+    // Display a confirmation message.
     if (settingsMessage !== null) {
-        settingsMessage.textContent =
-            "Settings restored to defaults.";
+        settingsMessage.textContent = "Settings restored to defaults.";
     }
 }
 
 // Preview theme changes immediately when the dropdown changes.
 if (darkModeSelect !== null) {
     darkModeSelect.addEventListener("change", function () {
+        // Apply dark mode when Dark Mode is selected.
         applyTheme(darkModeSelect.value === "dark");
     });
 }
 
-// Connect the save and reset buttons on the Settings page.
+// Add the save button action if the button exists on this page.
 if (saveSettingsButton !== null) {
     saveSettingsButton.addEventListener("click", saveSettings);
 }
 
+// Add the reset button action if the button exists on this page.
 if (resetSettingsButton !== null) {
     resetSettingsButton.addEventListener("click", resetSettings);
 }
 
-// Apply saved preferences when this script loads.
+// Load saved preferences whenever a page using this script opens.
 loadSettings();
