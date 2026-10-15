@@ -5,14 +5,16 @@ function getTickets() {
     if (savedTickets) {
         return JSON.parse(savedTickets);
     }
-
-    return [];
 }
 
 
 // Save the ticket list.
 function saveTickets(tickets) {
     localStorage.setItem("helpDeskTickets", JSON.stringify(tickets));
+}
+
+function testFunction(){
+    return "test text lmao";
 }
 
 
@@ -162,7 +164,103 @@ function loadDashboard() {
     }
 }
 
+/*function showTicketsOLD(){
+    const tickets = getTickets();
+    const list = document.getElementById("ticketList");
+
+    for (let i = 0; i < tickets.length; i++) {
+        const li = document.createElement("li");
+        li.innerText = tickets[i].subject;
+        list.appendChild(li);
+    }
+}*/
+
+function showTickets(){
+    const tickets = getTickets();
+    const list = document.getElementById("ticketList");
+
+    for (let i = 0; i < tickets.length; i++) {
+        const ticketEntry = document.createElement("div");
+        const ticketHeader = document.createElement("h3");
+        ticketHeader.innerText = "ID: " + tickets[i].id;
+        ticketEntry.appendChild(ticketHeader);
+
+        const li1 = document.createElement("li");
+        li1.innerText = "Category: " + tickets[i].category;
+        ticketEntry.appendChild(li1);
+
+        const li2 = document.createElement("li");
+        li2.innerText = "Subject: " + tickets[i].subject;
+        ticketEntry.appendChild(li2);
+
+        const li3 = document.createElement("li");
+        li3.innerText = "Priority: " + tickets[i].priority;
+        ticketEntry.appendChild(li3);
+
+        const li4 = document.createElement("li");
+        li4.innerText = "Description: " + tickets[i].description;
+        ticketEntry.appendChild(li4);
+
+        const li5 = document.createElement("li");
+        li5.innerText = "Device: " + tickets[i].device;
+        ticketEntry.appendChild(li5);
+
+        const li6 = document.createElement("li");
+        li6.innerText = "Status: " + tickets[i].status;
+        ticketEntry.appendChild(li6);
+
+        const li7 = document.createElement("li");
+        li7.innerText = "Date created: " + tickets[i].dateCreated;
+        ticketEntry.appendChild(li7);
+        
+        list.appendChild(ticketEntry);
+    }
+}
+
+//Creates fake ticket data to test tickets.html, since the browser I used would not save the ticket for whatever reason
+/*function testTickets(){
+    const list = document.getElementById("ticketList");
+
+    const ticketEntry = document.createElement("div");
+    const ticketHeader = document.createElement("h3");
+    ticketHeader.innerText = "ID: 00000";
+    ticketEntry.appendChild(ticketHeader);
+
+    const li1 = document.createElement("li");
+    li1.innerText = "Category: -testtesttest-";
+    ticketEntry.appendChild(li1);
+
+    const li2 = document.createElement("li");
+    li2.innerText = "Subject: -testtesttest-";
+    ticketEntry.appendChild(li2);
+
+    const li3 = document.createElement("li");
+    li3.innerText = "Priority: -testtesttest-";
+    ticketEntry.appendChild(li3);
+
+    const li4 = document.createElement("li");
+    li4.innerText = "Description: -testtesttest-";
+    ticketEntry.appendChild(li4);
+
+    const li5 = document.createElement("li");
+    li5.innerText = "Device: -testtesttest-";
+    ticketEntry.appendChild(li5);
+
+    const li6 = document.createElement("li");
+    li6.innerText = "Status: -testtesttest-";
+    ticketEntry.appendChild(li6);
+
+    const li7 = document.createElement("li");
+    li7.innerText = "Date created: -testtesttest-";
+    ticketEntry.appendChild(li7);
+    
+    list.appendChild(ticketEntry);
+}*/
 
 // Run the appropriate functions for the current page.
 setupTicketForm();
 loadDashboard();
+showTickets();
+//testTickets();
+
+// document.getElementById("ticketDisplay").innerHTML = 
