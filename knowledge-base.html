@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Set the character encoding and responsive page layout. -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Set the page title and load the shared stylesheet. -->
     <title>IT Help Desk - Knowledge Base</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <header>
-    <!-- Website navigation. -->
+    <!-- Shared navigation links used throughout the Help Desk website. -->
     <div class="navbar">
         <h1>IT Help Desk</h1>
+
         <nav>
             <a href="index.html">Dashboard</a>
             <a href="submit-ticket.html">Submit Ticket</a>
@@ -25,16 +29,19 @@
 </header>
 
 <main>
+    <!-- Page heading and a short explanation of the Knowledge Base. -->
     <h2 class="page-title">Knowledge Base</h2>
+
     <p class="page-description">
         Search help articles for answers to common IT questions and problems.
     </p>
 
-    <!-- Search controls. Searching happens when Search is clicked. -->
+    <!-- Search form lets users search article titles and descriptions. -->
     <section class="card">
         <h2>Find an Article</h2>
 
         <form id="search-form">
+            <!-- Search text entered by the user. -->
             <label for="search">Search articles</label>
             <input
                 type="search"
@@ -43,8 +50,8 @@
                 placeholder="Try Wi-Fi, password, or printer..."
             >
 
-            <!-- The button has its own ID so JavaScript can find it. -->
-            <button type="submit" id="search-button">Search</button>
+            <!-- Submit the search or clear the current search. -->
+            <button type="submit">Search</button>
 
             <button
                 type="button"
@@ -55,16 +62,18 @@
             </button>
         </form>
 
+        <!-- JavaScript updates this text after a search is submitted. -->
         <p id="result-count" role="status" aria-live="polite">
-            Showing all 8 articles.
+            Showing all articles.
         </p>
     </section>
 
-    <!-- Help articles searched by the JavaScript. -->
+    <!-- The JavaScript searches and filters these help articles. -->
     <section class="card">
         <h2>Help Articles</h2>
 
         <div id="articles">
+            <!-- Article: account and password help. -->
             <article class="article">
                 <h3>How to Reset Your Password</h3>
                 <p>
@@ -75,6 +84,7 @@
                 <p><strong>Category:</strong> Accounts &amp; Passwords</p>
             </article>
 
+            <!-- Article: account access and login problems. -->
             <article class="article">
                 <h3>What to Do if Your Account Is Locked</h3>
                 <p>
@@ -85,6 +95,7 @@
                 <p><strong>Category:</strong> Accounts &amp; Passwords</p>
             </article>
 
+            <!-- Article: wireless network troubleshooting. -->
             <article class="article">
                 <h3>How to Connect to Wi-Fi</h3>
                 <p>
@@ -95,6 +106,7 @@
                 <p><strong>Category:</strong> Network &amp; Wi-Fi</p>
             </article>
 
+            <!-- Article: resolving common internet connection problems. -->
             <article class="article">
                 <h3>Fixing a Slow or Unavailable Internet Connection</h3>
                 <p>
@@ -105,6 +117,7 @@
                 <p><strong>Category:</strong> Network &amp; Wi-Fi</p>
             </article>
 
+            <!-- Article: printer troubleshooting. -->
             <article class="article">
                 <h3>How to Fix a Printer That Will Not Print</h3>
                 <p>
@@ -115,6 +128,7 @@
                 <p><strong>Category:</strong> Hardware &amp; Printers</p>
             </article>
 
+            <!-- Article: basic computer hardware troubleshooting. -->
             <article class="article">
                 <h3>What to Do if Your Computer Will Not Turn On</h3>
                 <p>
@@ -125,6 +139,7 @@
                 <p><strong>Category:</strong> Hardware &amp; Printers</p>
             </article>
 
+            <!-- Article: application troubleshooting. -->
             <article class="article">
                 <h3>How to Troubleshoot Software Problems</h3>
                 <p>
@@ -135,6 +150,7 @@
                 <p><strong>Category:</strong> Software</p>
             </article>
 
+            <!-- Article: common application update guidance. -->
             <article class="article">
                 <h3>How to Update Your Software</h3>
                 <p>
@@ -146,15 +162,17 @@
             </article>
         </div>
 
-        <!-- Shown when no articles match the submitted search. -->
+        <!-- JavaScript displays this message when no articles match. -->
         <p id="no-results" hidden>
             No articles match your search. Try different keywords.
         </p>
     </section>
 </main>
 
-<!-- Load site settings and Knowledge Base functionality. -->
+<!-- Apply saved appearance preferences. -->
 <script src="js/settings.js"></script>
+
+<!-- Load the Knowledge Base search functionality. -->
 <script src="js/knowledge-base.js"></script>
 
 </body>
