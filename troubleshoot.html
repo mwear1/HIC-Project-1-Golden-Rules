@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Help Desk - Troubleshooting</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
 <!-- Shared Navigation Bar For All Pages -->
 <header>
     <div class="navbar">
@@ -14,3 +25,115 @@
         </nav>
     </div>
 </header>
+
+<main>
+ <!-- Troubleshooting Page Introduction -->
+    <h2 class="page-title">Troubleshooting</h2>
+    <p class="page-description">
+        Answer a few questions to help troubleshoot your issue.
+    </p>
+
+    <label for="questions">Make a selection</label>
+            <select id="questionSelect" name="questions">
+                <option value="nothing">Select an issue</option>
+                <option value="screen">Black screen on device.</option>
+                <option value="internet">No internet connection.</option>
+                <option value="heat">Device is overheating.</option>
+            </select>
+
+            <div id="screen1">
+                <p>Is sound coming from the device?</p>
+                <select id="soundScreen" name="soundScreen">
+                    <option value="nothing">Select an option</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+            <div id="screen2">
+                <p>Check if the power cord is plugged in. If the device uses a battery, try charging it. Then power the device on. Did this fix your issue?</p>
+                <select id="fixScreen" name="fixScreen">
+                    <option value="nothing">Select an option</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+            <div id="internet1">
+                <p>Is the router powered on?</p>
+                <select id="powerRouter" name="powerRouter">
+                    <option value="nothing">Select an option</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+            <div id="internet2">
+                <p>Power on your router. Try connecting again after verifying your router is operational. Did this fix your issue?</p>
+                <select id="fixRouter" name="fixRouter">
+                    <option value="nothing">Select an option</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+            <div id="heat1">
+                <p>Has the device been cleaned recently?</p>
+                <select id="cleanHeat" name="cleanHeat">
+                    <option value="nothing">Select an option</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+            <div id="heat2">
+                <p>Clean your device thoroughly and remove anything that could be blocking airflow. Did this fix your issue?</p>
+                <select id="fixHeat" name="fixHeat">
+                    <option value="nothing">Select an option</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+            <div id="success">
+                <p>Great! Glad we could be of service!</p>
+            </div>
+
+            <div id="fail">
+                <p>Oh no! Please submit a ticket for your issue so we can help you further.</p>
+            </div>
+
+            <!--ok here's the ideas:
+            screen:
+            ask "Is there sound? yes/no"
+                If no, ask "Check if the power cord is plugged in. If the device uses a battery, try charging it. Then power the device on. Did this fix your issue?"
+                    If no, show unsuccessful message.
+                    If yes, show the "successful" message.
+                If yes, show unsuccessful message.
+
+            internet:
+            ask "Is the router powered on?"
+                If no, ask "Power on your router. Try connecting again after verifying your router is operational. Did this fix your issue?"
+                    If no, show unsuccessful message.
+                    If yes, show successful message.
+                If yes, show unsuccessful message.
+
+            overheating:
+            ask "Has the device been cleaned recently?"
+                If no, ask "Clean your device thoroughly and remove anything that could be blocking airflow. Did this fix your issue?"
+                    If no, show unsuccessful message.
+                    If yes, show the "successful" message.
+                If yes, show unsuccessful message.
+
+            Successful message: "Great! Glad we could be of service!"
+            Unsuccessful message: "Oh no! Please submit a ticket for your issue so we can help you further."
+            -->
+
+    <script src="js/troubleshoot.js"></script>
+
+<!-- Apply saved appearance settings -->
+<script src="js/settings.js"></script>
+
+</main>
+
+</body>
