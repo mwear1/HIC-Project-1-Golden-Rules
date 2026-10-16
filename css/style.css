@@ -154,21 +154,131 @@ textarea {
     flex-wrap: wrap;
 }
 
-.center-tickets {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* =========================================
+   DARK MODE
+   Activated when settings.js adds the
+   "dark-theme" class to the body.
+   ========================================= */
+
+body.dark-theme {
+    background-color: #121820;
+    color: #e5e7eb;
+    color-scheme: dark;
 }
 
-.center-tickets li {
-    list-style: none;
+/* Navigation and header */
+body.dark-theme header {
+    background-color: #1b2532;
+    color: #f3f4f6;
 }
 
-.center-tickets div {
-    background-color: lightgrey;
-    padding: 13px;
+body.dark-theme .navbar a {
+    color: #e5e7eb;
 }
 
+body.dark-theme .navbar a:hover,
+body.dark-theme .navbar a:focus {
+    background-color: #3d536b;
+    color: #ffffff;
+}
+
+/* Main text */
+body.dark-theme main,
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme p,
+body.dark-theme label,
+body.dark-theme strong,
+body.dark-theme .page-title {
+    color: #e5e7eb;
+}
+
+/* Page descriptions */
+body.dark-theme .page-description {
+    color: #b8c1cc;
+}
+
+/* Cards and content areas */
+body.dark-theme .card {
+    background-color: #1b2532;
+    color: #e5e7eb;
+    border-color: #374151;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Form fields */
+body.dark-theme input,
+body.dark-theme select,
+body.dark-theme textarea {
+    background-color: #111827;
+    color: #f9fafb;
+    border: 1px solid #4b5563;
+}
+
+body.dark-theme input::placeholder,
+body.dark-theme textarea::placeholder {
+    color: #9ca3af;
+}
+
+/* Buttons */
+body.dark-theme .button,
+body.dark-theme button {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: 1px solid #3b82f6;
+}
+
+body.dark-theme .button:hover,
+body.dark-theme button:hover {
+    background-color: #1d4ed8;
+}
+
+/* Secondary buttons */
+body.dark-theme .button-secondary {
+    background-color: #374151;
+    color: #f9fafb;
+    border-color: #6b7280;
+}
+
+body.dark-theme .button-secondary:hover {
+    background-color: #4b5563;
+}
+
+/* Success messages */
+body.dark-theme .success-message {
+    background-color: #163524;
+    color: #d1fae5;
+    border-color: #28734a;
+}
+
+/* Error messages */
+body.dark-theme .error-message {
+    color: #fca5a5;
+}
+
+/* Knowledge Base articles and separators */
+body.dark-theme .article {
+    color: #e5e7eb;
+    border-color: #374151;
+}
+
+/* Ensure filtered articles stay hidden */
+.article[hidden] {
+    display: none !important;
+}
+
+/* Ensure hidden no-results messages stay hidden */
+#no-results[hidden] {
+    display: none !important;
+}
+
+/* No-results message when visible */
+body.dark-theme #no-results {
+    color: #e5e7eb;
+}
+
+/* Responsive layout */
 @media (max-width: 700px) {
     .dashboard-cards {
         grid-template-columns: 1fr;
