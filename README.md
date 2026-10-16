@@ -6,7 +6,7 @@ The goal of the project is to demonstrate the Eight Golden Rules of Interface De
 
 The application provides users with a simple interface for requesting technical support, reviewing submitted tickets, finding self-service help, troubleshooting common IT problems, managing profile information, and changing application preferences.
 
-The application was built using HTML, CSS, and JavaScript. Browser localStorage is used to save ticket information, profile information, and user settings without requiring a backend database.
+The application was built using HTML, CSS, and JavaScript. Browser `localStorage` is used to save ticket information, profile information, and user settings without requiring a backend database.
 
 ## Application Pages
 
@@ -29,7 +29,7 @@ The pages share a consistent navigation system and visual design. The applicatio
 - Submit Ticket page
 - Initial project structure and shared application setup
 - GitHub repository setup and project collaboration setup
-- Ticket storage and Dashboard integration using localStorage
+- Ticket storage and Dashboard integration using `localStorage`
 - Form validation and ticket submission functionality
 - Integration testing and debugging
 - Bug fixes across shared functionality and maintaining consistency across pages
@@ -54,14 +54,14 @@ The pages share a consistent navigation system and visual design. The applicatio
 - HTML
 - CSS
 - JavaScript
-- Browser localStorage
-- GitHub / GitHub Pages
+- Browser `localStorage`
+- GitHub and GitHub Pages
 
 ## Running the Application
 
 The application can be opened through the project's GitHub Pages site or run locally.
 
-Direct Link: https://mwear1.github.io/HIC-Project-1-Golden-Rules/
+**Live Application:** [IT Help Desk](https://mwear1.github.io/HIC-Project-1-Golden-Rules/)
 
 To run it locally:
 
@@ -70,4 +70,4 @@ To run it locally:
 3. Open `index.html` using Live Server.
 4. Navigate between pages using the shared navigation bar.
 
-Because the project uses browser localStorage, saved tickets, profile information, and settings are stored separately in each user's browser.
+Because the project uses browser `localStorage`, saved tickets, profile information, and settings are stored separately in each user's browser.
