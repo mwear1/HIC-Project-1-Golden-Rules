@@ -31,20 +31,22 @@ heat2Select.addEventListener("change", selectQuestion);
 selectQuestion();
 
 function selectQuestion(){
-    hide();
     var selectedQuestion = questionSelect.value;
 
     if (selectedQuestion === "screen"){
-        //hide();
+        hide();
         troubleshootScreen();
     }
     else if (selectedQuestion === "internet"){
-        //hide();
+        hide();
         troubleshootInternet();
     }
     else if (selectedQuestion === "heat"){
-        //hide();
+        hide();
         troubleshootHeat();
+    }
+    else {
+        hide();
     }
 }
 
