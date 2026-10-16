@@ -218,5 +218,3 @@ function showTickets(){
 setupTicketForm();
 loadDashboard();
 showTickets();
-
-// document.getElementById("ticketDisplay").innerHTML = 

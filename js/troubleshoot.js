@@ -14,6 +14,22 @@ let internet2 = document.getElementById("internet2");
 let heat1 = document.getElementById("heat1");
 let heat2 = document.getElementById("heat2");
 
+// Update troubleshooting steps whenever the user makes a selection.
+questionSelect.addEventListener("change", selectQuestion);
+
+screen1Select.addEventListener("change", selectQuestion);
+screen2Select.addEventListener("change", selectQuestion);
+
+internet1Select.addEventListener("change", selectQuestion);
+internet2Select.addEventListener("change", selectQuestion);
+
+heat1Select.addEventListener("change", selectQuestion);
+heat2Select.addEventListener("change", selectQuestion);
+
+
+// Hide all troubleshooting steps until an issue is selected.
+selectQuestion();
+
 function selectQuestion(){
     hide();
     var selectedQuestion = questionSelect.value;
@@ -30,9 +46,6 @@ function selectQuestion(){
         //hide();
         troubleshootHeat();
     }
-    /*else {
-        hide();
-    }*/
 }
 
 function hide(){
