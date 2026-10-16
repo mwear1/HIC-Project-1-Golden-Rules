@@ -154,6 +154,21 @@ textarea {
     flex-wrap: wrap;
 }
 
+.center-tickets {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-tickets li {
+    list-style: none;
+}
+
+.center-tickets div {
+    background-color: lightgrey;
+    padding: 13px;
+}
+
 @media (max-width: 700px) {
     .dashboard-cards {
         grid-template-columns: 1fr;

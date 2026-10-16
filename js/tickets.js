@@ -166,17 +166,6 @@ function loadDashboard() {
     }
 }
 
-/*function showTicketsOLD(){
-    const tickets = getTickets();
-    const list = document.getElementById("ticketList");
-
-    for (let i = 0; i < tickets.length; i++) {
-        const li = document.createElement("li");
-        li.innerText = tickets[i].subject;
-        list.appendChild(li);
-    }
-}*/
-
 function showTickets(){
     const tickets = getTickets();
     const list = document.getElementById("ticketList");
