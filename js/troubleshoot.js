@@ -15,24 +15,23 @@ let heat1 = document.getElementById("heat1");
 let heat2 = document.getElementById("heat2");
 
 function selectQuestion(){
-    hide();
     var selectedQuestion = questionSelect.value;
 
     if (selectedQuestion === "screen"){
-        //hide();
+        hide();
         troubleshootScreen();
     }
     else if (selectedQuestion === "internet"){
-        //hide();
+        hide();
         troubleshootInternet();
     }
     else if (selectedQuestion === "heat"){
-        //hide();
+        hide();
         troubleshootHeat();
     }
-    /*else {
+    else {
         hide();
-    }*/
+    }
 }
 
 function hide(){
