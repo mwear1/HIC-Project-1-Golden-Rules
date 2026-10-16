@@ -278,6 +278,21 @@ body.dark-theme #no-results {
     color: #e5e7eb;
 }
 
+.center-tickets {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-tickets div {
+    background-color: lightgrey;
+    padding: 13px;
+}
+
+.center-tickets li {
+    list-style: none;
+}
+
 /* Responsive layout */
 @media (max-width: 700px) {
     .dashboard-cards {
