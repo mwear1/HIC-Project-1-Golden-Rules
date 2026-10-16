@@ -47,7 +47,8 @@ The pages share a consistent navigation system and visual design. The applicatio
 - My Tickets page
 - Ticket display functionality
 - Troubleshoot page
-- Troubleshooting interactions and functionality
+- Guided troubleshooting flows for common IT issues
+- Conditional troubleshooting questions and success/failure outcomes
 
 ## Technologies Used
 
