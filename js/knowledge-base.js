@@ -70,16 +70,6 @@ if (searchForm !== null) {
     });
 }
 
-// Update results as the user types in the search field.
-if (searchInput !== null) {
-    searchInput.addEventListener("input", filterArticles);
-}
-
-// Update results whenever the selected category changes.
-if (categorySelect !== null) {
-    categorySelect.addEventListener("change", filterArticles);
-}
-
 // Clear the search text and restore all articles.
 if (clearSearchButton !== null) {
     clearSearchButton.addEventListener("click", function () {
