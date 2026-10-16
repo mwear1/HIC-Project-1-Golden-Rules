@@ -278,19 +278,26 @@ body.dark-theme #no-results {
     color: #e5e7eb;
 }
 
+/* My Tickets */
 .center-tickets {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.center-tickets div {
-    background-color: lightgrey;
-    padding: 13px;
+.ticket-entry {
+    width: 100%;
 }
 
-.center-tickets li {
+.ticket-entry h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.ticket-entry li {
     list-style: none;
+    margin-bottom: 8px;
+    line-height: 1.4;
 }
 
 /* Responsive layout */

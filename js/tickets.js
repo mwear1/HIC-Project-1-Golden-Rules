@@ -177,6 +177,7 @@ function showTickets(){
 
     for (let i = 0; i < tickets.length; i++) {
         const ticketEntry = document.createElement("div");
+        ticketEntry.className = "card ticket-entry";
         const ticketHeader = document.createElement("h3");
         ticketHeader.innerText = "ID: " + tickets[i].id;
         ticketEntry.appendChild(ticketHeader);
