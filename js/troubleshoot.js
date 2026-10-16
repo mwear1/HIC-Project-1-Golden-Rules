@@ -45,6 +45,9 @@ function selectQuestion(){
         hide();
         troubleshootHeat();
     }
+    else {
+        hide();
+    }
 }
 
 function hide(){
