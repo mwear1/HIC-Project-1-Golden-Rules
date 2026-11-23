@@ -135,6 +135,25 @@ textarea {
     margin-bottom: 20px;
 }
 
+/* Network status messages */
+.network-status {
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.network-offline {
+    background-color: #fff3cd;
+    border: 1px solid #d6b656;
+    color: #664d03;
+}
+
+.network-online {
+    background-color: #e8f5e9;
+    border: 1px solid #7cb982;
+    color: #1f5130;
+}
+
 /* Dashboard */
 .dashboard-cards {
     display: grid;
@@ -180,6 +199,18 @@ body.dark-theme .navbar a:hover,
 body.dark-theme .navbar a:focus {
     background-color: #3d536b;
     color: #ffffff;
+}
+
+body.dark-theme .network-offline {
+    background-color: #453b17;
+    border-color: #8a762f;
+    color: #fff3bf;
+}
+
+body.dark-theme .network-online {
+    background-color: #163524;
+    border-color: #28734a;
+    color: #d1fae5;
 }
 
 /* Main text */
